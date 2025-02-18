@@ -1,5 +1,5 @@
 # LogSentinel
-Your servers guardian angel.
+Your server's guardian angel.
 
 
 - Detailed Action Logging

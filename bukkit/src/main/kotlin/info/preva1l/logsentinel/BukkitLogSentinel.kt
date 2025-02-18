@@ -19,6 +19,18 @@ import org.bukkit.plugin.java.JavaPlugin
 class BukkitLogSentinel : JavaPlugin(), LogSentinel {
     private var flavor: Flavor by WriteOnce()
 
+    override fun onLoad() {
+        load()
+    }
+
+    override fun onEnable() {
+        start()
+    }
+
+    override fun onDisable() {
+        stop()
+    }
+
     override fun flavor(flavor: Flavor) {
         this.flavor = flavor
     }

@@ -102,9 +102,9 @@ class PluginProcessor(
             data["softdepend"] = soft
         }
 
-        val libraries: Array<String> = annotation.libraries
+        val libraries = annotation.libraries
         if (libraries.isNotEmpty()) {
-            data["libraries"] = ArrayList(listOf(libraries))
+            data["libraries"] = libraries
         }
 
         try {
