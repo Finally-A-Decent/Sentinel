@@ -8,6 +8,8 @@ import info.preva1l.logsentinel.libraries.flavor.service.Close
 import info.preva1l.logsentinel.libraries.flavor.service.Configure
 import info.preva1l.logsentinel.libraries.flavor.service.Service
 import info.preva1l.logsentinel.libraries.flavor.service.ignore.IgnoreAutoScan
+import info.preva1l.logsentinel.libraries.flavor.service.requirement.Require
+import info.preva1l.logsentinel.libraries.flavor.service.requirement.Requirement
 import java.lang.reflect.Method
 import java.util.logging.Level
 import kotlin.reflect.KClass
@@ -325,6 +327,13 @@ class Flavor(
 
         if (isServiceClazz)
         {
+            val requirements: Array<Requirement> = clazz.java.getDeclaredAnnotationsByType(Requirement::class.java)
+
+            for (requirement in requirements) {
+                requirement.check
+                requirement.
+            }
+
             val configure = clazz.java.declaredMethods
                 .firstOrNull { it.isAnnotationPresent(Configure::class.java) }
 
