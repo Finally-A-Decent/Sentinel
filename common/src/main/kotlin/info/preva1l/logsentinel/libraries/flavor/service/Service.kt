@@ -16,6 +16,7 @@ import java.lang.annotation.Inherited
  */
 @Inherited
 @MustBeDocumented
+@Target(AnnotationTarget.CLASS)
 annotation class Service(
     val name: String = "",
     val priority: Int = 1

@@ -10,6 +10,7 @@ import info.preva1l.logsentinel.libraries.flavor.service.Service
 import info.preva1l.logsentinel.libraries.flavor.service.ignore.IgnoreAutoScan
 import info.preva1l.logsentinel.libraries.flavor.service.requirement.Require
 import info.preva1l.logsentinel.libraries.flavor.service.requirement.Requirement
+import info.preva1l.logsentinel.libraries.flavor.service.requirement.RequirementChecker
 import java.lang.reflect.Method
 import java.util.logging.Level
 import kotlin.reflect.KClass
@@ -31,18 +32,22 @@ class Flavor(
          */
         @JvmStatic
         inline fun <reified T> create(
+            checker: RequirementChecker,
             options: FlavorOptions = FlavorOptions()
         ): Flavor
         {
+            RequirementChecker.instance = checker
             return Flavor(T::class, options)
         }
 
         @JvmStatic
         fun create(
             initializer: KClass<*>,
+            checker: RequirementChecker,
             options: FlavorOptions = FlavorOptions()
         ): Flavor
         {
+            RequirementChecker.instance = checker
             return Flavor(initializer, options)
         }
     }
@@ -327,11 +332,11 @@ class Flavor(
 
         if (isServiceClazz)
         {
-            val requirements: Array<Requirement> = clazz.java.getDeclaredAnnotationsByType(Requirement::class.java)
+            val requirements: Array<Require> = clazz.java
+                .getDeclaredAnnotationsByType(Require::class.java)
 
             for (requirement in requirements) {
-                requirement.check
-                requirement.
+                if (!requirement.check.test.invoke(requirement.data)) return
             }
 
             val configure = clazz.java.declaredMethods

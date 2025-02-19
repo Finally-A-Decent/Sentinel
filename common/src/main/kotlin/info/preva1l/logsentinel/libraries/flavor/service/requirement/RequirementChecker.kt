@@ -1,6 +1,6 @@
 package info.preva1l.logsentinel.libraries.flavor.service.requirement
 
-import com.sun.source.util.Plugin
+import info.preva1l.logsentinel.utils.WriteOnce
 
 /**
  * Created on 19/02/2025
@@ -9,8 +9,10 @@ import com.sun.source.util.Plugin
  */
 abstract class RequirementChecker {
     companion object {
-        private var instance: RequirementChecker? = null
+        var instance: RequirementChecker by WriteOnce()
     }
 
     abstract fun pluginExists(plugin: String): Boolean
+
+    abstract fun serverVersionIsCompatible(version: String): Boolean
 }

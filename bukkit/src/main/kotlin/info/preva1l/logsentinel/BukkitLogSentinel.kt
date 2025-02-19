@@ -2,8 +2,11 @@ package info.preva1l.logsentinel
 
 import info.preva1l.logsentinel.annotations.Plugin
 import info.preva1l.logsentinel.libraries.flavor.Flavor
+import info.preva1l.logsentinel.libraries.flavor.FlavorOptions
+import info.preva1l.logsentinel.libraries.flavor.service.requirement.BukkitRequirementChecker
 import info.preva1l.logsentinel.utils.WriteOnce
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.logging.Logger
 
 @Plugin(
     name = "LogSentinel",
@@ -20,6 +23,10 @@ class BukkitLogSentinel : JavaPlugin(), LogSentinel {
     private var flavor: Flavor by WriteOnce()
 
     override fun onLoad() {
+        flavor = Flavor.create<LogSentinel>(
+            BukkitRequirementChecker(),
+            FlavorOptions(Logger.getLogger("LogSentinel")),
+        )
         load()
     }
 
@@ -29,10 +36,6 @@ class BukkitLogSentinel : JavaPlugin(), LogSentinel {
 
     override fun onDisable() {
         stop()
-    }
-
-    override fun flavor(flavor: Flavor) {
-        this.flavor = flavor
     }
 
     override fun flavor(): Flavor = flavor

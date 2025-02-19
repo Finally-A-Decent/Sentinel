@@ -6,11 +6,7 @@ import java.util.logging.Logger
 
 interface LogSentinel {
     fun load() {
-        flavor(
-            Flavor.create<LogSentinel>(
-                FlavorOptions(Logger.getLogger("LogSentinel")),
-            )
-        )
+
     }
 
     fun start() {
@@ -21,6 +17,5 @@ interface LogSentinel {
 
     }
 
-    fun flavor(flavor: Flavor)
     fun flavor(): Flavor
 }
