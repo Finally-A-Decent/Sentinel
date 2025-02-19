@@ -103,8 +103,8 @@ subprojects {
 
 fun RepositoryHandler.configureFinallyADecentRepository(dev: Boolean = false)
 {
-    val user: String? = property("fad_username")?.toString()
-    val pass: String? = property("fad_password")?.toString()
+    val user: String? = properties["fad_username"]?.toString()
+    val pass: String? = properties["fad_password"]?.toString()
 
     if (user != null && pass != null) {
         maven("https://repo.preva1l.info/${if (dev) "development" else "releases"}/") {

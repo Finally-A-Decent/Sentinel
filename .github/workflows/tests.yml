@@ -27,6 +27,9 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Build with Gradle Wrapper
+      env:
+        fad_username: ${{ secrets.REPO_USERNAME }}
+        fad_password: ${{ secrets.REPO_PASSWORD }}
       run: ./gradlew build
 
   dependency-submission:
