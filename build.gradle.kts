@@ -17,7 +17,7 @@ if (currentBranch != "master") {
 }
 
 allprojects {
-    group = "info.preva1l"
+    group = "info.preva1l.sentinel"
     version = "1.0.0"
 
     repositories {

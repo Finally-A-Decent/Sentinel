@@ -1,4 +1,4 @@
-rootProject.name = "LogSentinel"
+rootProject.name = "Sentinel"
 
 include(":api")
 include(":common")
