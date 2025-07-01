@@ -1,5 +1,7 @@
 package info.preva1l.sentinel.user;
 
+import net.kyori.adventure.text.Component;
+
 import java.util.UUID;
 
 /**
@@ -12,5 +14,5 @@ public interface User {
 
     UUID uniqueId();
 
-    void sendMessage(String message);
+    void sendMessage(Component message);
 }

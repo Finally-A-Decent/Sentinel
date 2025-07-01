@@ -1,10 +1,11 @@
-repositories {
-
+plugins {
+    sentinel.common
 }
 
+
 dependencies {
-    compileOnly("org.aspectj:aspectjrt:1.9.22.1")
-    compileOnly("org.aspectj:aspectjweaver:1.9.22.1")
+    api("net.kyori:adventure-api:4.13.0")
+    api("net.kyori:adventure-nbt:4.13.0")
 }
 
 tasks.register("publishApi") {

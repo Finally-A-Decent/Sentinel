@@ -1,9 +1,9 @@
-# LogSentinel
+# Sentinel
 Your server's guardian angel.
 
-
-- Detailed Action Logging
+- Detailed action logging
+- Platform agnostic (rollback Paper data onto a Fabric server)
 - Invisible on Spark
-- And most importantly... not Core Protect!
+- And most importantly... it's not CoreProtect!
 
 more soon...

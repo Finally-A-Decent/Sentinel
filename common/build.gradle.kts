@@ -1,13 +1,17 @@
-repositories {
+import info.preva1l.trashcan.trashcan
 
+plugins {
+    sentinel.common
 }
 
 dependencies {
-    ksp(project(":api"))
     api(project(":api"))
+    trashcan()
 
-    implementation("info.preva1l.showman:backend:1.0.0")
-    compileOnly("de.exlll:configlib-yaml:4.5.0")
+    api(libs.annotations)
+    annotationProcessor(libs.annotations)
 
-    compileOnly("org.reflections:reflections:0.10.2")
+    testImplementation(libs.bundles.junit)
+    testRuntimeOnly(libs.bundles.junit.runtime)
+    testCompileOnly(libs.annotations)
 }

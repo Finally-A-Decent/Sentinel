@@ -1,7 +1,8 @@
 package info.preva1l.sentinel.events;
 
+import info.preva1l.sentinel.ApiSanityChecker;
 import info.preva1l.sentinel.events.annotations.Subscribe;
-import info.preva1l.sentinel.sanity.ApiSanityChecker;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,7 +11,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * The LogSentinel Event Bus is a simple, yet feature rich event system for the LogSentinel API.
+ * The Sentinel Event Bus is a simple, yet feature rich event system for the Sentinel API.
  *
  * <p> Created on 18/02/2025 </p>
  *
@@ -25,7 +26,7 @@ public final class SentinelEventBus {
      * You add the handler in the next step!
      */
     public <T extends Event> SubscriptionBuilder<T> subscribe(Class<T> event) {
-        return subscribe(event, EventOrder.FIRST);
+        return subscribe(event, EventOrder.NORMAL);
     }
 
     /**
@@ -44,13 +45,13 @@ public final class SentinelEventBus {
      * <pre>{@code
      *  class MyPlugin {
      *      init {
-     *          LogSentinelEventBus.instance().subscribe(MyEventListener())
+     *          SentinelEventBus.instance().subscribe(MyEventListener())
      *      }
      *  }
      *
      *  class MyEventListener {
      *      @Subscribe
-     *      fun on(event: UserLogActionEvent) {
+     *      fun on(event: ActionLoggedEvent) {
      *          println(event.user.toString())
      *      }
      *  }
@@ -83,6 +84,7 @@ public final class SentinelEventBus {
     }
 
     @SuppressWarnings("unchecked")
+    @ApiStatus.Internal
     public <T extends Event> boolean post(T event) {
         var set = subscribers.get(event.getClass());
         if (set == null) return false;
@@ -120,14 +122,14 @@ public final class SentinelEventBus {
     }
 
     /**
-     * Get the instance of the LogSentinel Event Bus
+     * Get the instance of the Sentinel Event Bus
      */
     public static SentinelEventBus instance() {
-        if (!ApiSanityChecker.validApiInstance)
+        if (!ApiSanityChecker.isValid())
             throw new IllegalStateException(
                     """
-                    The LogSentinelAPI is not available!
-                    You most likely shaded/implemented the api instead of compiling against it!
+                    The Sentinel API is not available!
+                    You have most likely shaded/implemented the api instead of compiling against it!
                     """.stripIndent()
             );
         return INSTANCE;

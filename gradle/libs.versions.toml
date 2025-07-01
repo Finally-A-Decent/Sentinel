@@ -1,0 +1,27 @@
+[versions]
+kotlin = "2.1.10"
+shadow = "8.3.6"
+grgit = "5.3.0"
+trashcan = "1.0.0"
+annotations = "26.0.2"
+junit-jupiter = "5.12.2"
+junit-platform = "1.12.2"
+
+[libraries]
+kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+annotations = { module = "org.jetbrains:annotations", version.ref = "annotations" }
+
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit-jupiter" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
+
+[bundles]
+junit = ["junit-jupiter-api", "junit-jupiter-params"]
+junit-runtime = ["junit-jupiter-engine", "junit-platform-launcher"]
+
+[plugins]
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+grgit = { id = "org.ajoberstar.grgit", version.ref = "grgit" }
+trashcan = { id = "info.preva1l.trashcan", version.ref = "trashcan" }
